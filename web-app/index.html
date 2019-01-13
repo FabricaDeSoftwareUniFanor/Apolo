@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Projeto Apolo</title>
+    <link rel="stylesheet" href="lib/bootstrap-4.2.1-dist/css/bootstrap.min.css">
+
+    <script src="lib/angular-1.7.5/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/homeCtrl.js"></script>
+</head>
+
+<body ng-app="Apolo">
+    <div class="jumbotron container" ng-controller="homeCtrl as home">
+        <h1 style="text-align: center;">{{home.name}}</h1>
+        <h2 style="text-align: center;">{{home.description}}</h2>
+        <hr>
+        <div style="text-align: center;" name="login">
+            <h2>Login</h2>
+          <input class="form-control" type="text" name="" placeholder="usuário">
+          <input class="form-control" type="password" name="" placeholder="senha">
+          <button class="form-control btn btn-primary">Logar/Criar usuário</button>  
+        </div>
+    </div>
+</body>
+
+</html>
