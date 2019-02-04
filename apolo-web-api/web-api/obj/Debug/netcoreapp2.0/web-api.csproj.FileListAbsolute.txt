@@ -1,0 +1,12 @@
+C:\Users\igorl\source\FS\Apolo\apolo-web-api\web-api\bin\Debug\netcoreapp2.0\web-api.deps.json
+C:\Users\igorl\source\FS\Apolo\apolo-web-api\web-api\bin\Debug\netcoreapp2.0\web-api.runtimeconfig.json
+C:\Users\igorl\source\FS\Apolo\apolo-web-api\web-api\bin\Debug\netcoreapp2.0\web-api.runtimeconfig.dev.json
+C:\Users\igorl\source\FS\Apolo\apolo-web-api\web-api\bin\Debug\netcoreapp2.0\web-api.dll
+C:\Users\igorl\source\FS\Apolo\apolo-web-api\web-api\bin\Debug\netcoreapp2.0\web-api.pdb
+C:\Users\igorl\source\FS\Apolo\apolo-web-api\web-api\obj\Debug\netcoreapp2.0\web-api.csprojAssemblyReference.cache
+C:\Users\igorl\source\FS\Apolo\apolo-web-api\web-api\obj\Debug\netcoreapp2.0\web-api.csproj.CoreCompileInputs.cache
+C:\Users\igorl\source\FS\Apolo\apolo-web-api\web-api\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\igorl\source\FS\Apolo\apolo-web-api\web-api\obj\Debug\netcoreapp2.0\web-api.AssemblyInfoInputs.cache
+C:\Users\igorl\source\FS\Apolo\apolo-web-api\web-api\obj\Debug\netcoreapp2.0\web-api.AssemblyInfo.cs
+C:\Users\igorl\source\FS\Apolo\apolo-web-api\web-api\obj\Debug\netcoreapp2.0\web-api.dll
+C:\Users\igorl\source\FS\Apolo\apolo-web-api\web-api\obj\Debug\netcoreapp2.0\web-api.pdb
