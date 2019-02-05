@@ -7,9 +7,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using web_api.Data;
+using ApoloWebApp.Data;
 
-namespace web_api.Pages.Account
+namespace ApoloWebApp.Pages.Account
 {
     public class LoginModel : PageModel
     {

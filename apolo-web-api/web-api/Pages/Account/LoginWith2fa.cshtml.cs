@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using web_api.Data;
+using ApoloWebApp.Data;
 
-namespace web_api.Pages.Account
+namespace ApoloWebApp.Pages.Account
 {
     public class LoginWith2faModel : PageModel
     {

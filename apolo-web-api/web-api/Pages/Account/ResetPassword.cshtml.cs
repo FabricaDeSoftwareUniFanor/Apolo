@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using web_api.Data;
+using ApoloWebApp.Data;
 
-namespace web_api.Pages.Account
+namespace ApoloWebApp.Pages.Account
 {
     public class ResetPasswordModel : PageModel
     {

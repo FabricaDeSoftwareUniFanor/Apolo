@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using web_api.Data;
-using web_api.Services;
+using ApoloWebApp.Data;
+using ApoloWebApp.Services;
 
-namespace web_api
+namespace ApoloWebApp
 {
     public class Startup
     {

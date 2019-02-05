@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using web_api.Data;
-using web_api.Services;
+using ApoloWebApp.Data;
+using ApoloWebApp.Services;
 
-namespace web_api.Pages.Account
+namespace ApoloWebApp.Pages.Account
 {
     public class RegisterModel : PageModel
     {
@@ -35,6 +35,25 @@ namespace web_api.Pages.Account
 
         public class RegisterInputModel
         {
+            //[Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]            
+            [Display(Name = "Nome")]
+            public string Name { get; set; }
+
+            //[Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
+            [Display(Name = "Data de Nascimento")]
+            [DataType(DataType.Date)]
+            public string BirthDate { get; set; }
+
+            //[Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
+            [Display(Name = "Profissão")]            
+            public string Occupation { get; set; }
+            
+            //[Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
+            [Display(Name = "Contato")]
+            [DataType(DataType.PhoneNumber)]
+            [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+            public string PhoneNumber { get; set; }
+
             [Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
             [EmailAddress]
             [Display(Name = "Email")]

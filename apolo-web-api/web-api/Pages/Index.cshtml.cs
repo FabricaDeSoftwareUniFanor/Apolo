@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace web_api.Pages
+namespace ApoloWebApp.Pages
 {
     public class IndexModel : PageModel
     {

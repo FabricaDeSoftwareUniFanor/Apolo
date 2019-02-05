@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using web_api.Data;
-using web_api.Services;
+using ApoloWebApp.Data;
+using ApoloWebApp.Services;
 
-namespace web_api.Pages.Account
+namespace ApoloWebApp.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {

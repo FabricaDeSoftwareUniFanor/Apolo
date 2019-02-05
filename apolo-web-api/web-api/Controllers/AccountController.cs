@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using web_api.Data;
+using ApoloWebApp.Data;
 
-namespace web_api.Controllers
+namespace ApoloWebApp.Controllers
 {
     [Route("[controller]/[action]")]
     public class AccountController : Controller

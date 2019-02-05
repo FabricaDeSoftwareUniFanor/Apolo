@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace web_api
+namespace ApoloWebApp
 {
     public class Program
     {
