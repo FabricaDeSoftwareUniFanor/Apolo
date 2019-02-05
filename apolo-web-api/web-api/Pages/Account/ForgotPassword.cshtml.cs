@@ -26,7 +26,7 @@ namespace web_api.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage ="O campo {0} é obrigatório",AllowEmptyStrings =false)]
             [EmailAddress]
             public string Email { get; set; }
         }

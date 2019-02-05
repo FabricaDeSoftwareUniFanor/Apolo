@@ -1,13 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 using web_api.Data;
 
 namespace web_api.Pages.Account
@@ -24,7 +23,7 @@ namespace web_api.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public LoginInputModel Input { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
@@ -33,17 +32,18 @@ namespace web_api.Pages.Account
         [TempData]
         public string ErrorMessage { get; set; }
 
-        public class InputModel
+        public class LoginInputModel
         {
-            [Required]
+            [Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
+            [Display(Name = "Senha")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = "Lembrar?")]
+            [Display(Name = "Lembrar me?")]
             public bool RememberMe { get; set; }
         }
 
@@ -87,7 +87,7 @@ namespace web_api.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Tentativa de login inválida.");
                     return Page();
                 }
             }
