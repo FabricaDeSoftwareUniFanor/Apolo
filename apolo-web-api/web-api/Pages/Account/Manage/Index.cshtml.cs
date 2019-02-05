@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using web_api.Data;
 using web_api.Services;
 
@@ -28,6 +25,7 @@ namespace web_api.Pages.Account.Manage
             _emailSender = emailSender;
         }
 
+        [Display(Name ="Usuário ou Email")]
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
@@ -40,12 +38,12 @@ namespace web_api.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage ="O campo {0} é obrigatório", AllowEmptyStrings =false)]
             [EmailAddress]
             public string Email { get; set; }
 
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Número de telefone")]
             public string PhoneNumber { get; set; }
         }
 
@@ -101,7 +99,7 @@ namespace web_api.Pages.Account.Manage
                 }
             }
 
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Seu perfil foi atualizado!";
             return RedirectToPage();
         }
         public async Task<IActionResult> OnPostSendVerificationEmailAsync()
@@ -121,7 +119,7 @@ namespace web_api.Pages.Account.Manage
             var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
             await _emailSender.SendEmailConfirmationAsync(user.Email, callbackUrl);
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            StatusMessage = "Email de verificação enviado. Por favor, check seu email.";
             return RedirectToPage();
         }
     }
