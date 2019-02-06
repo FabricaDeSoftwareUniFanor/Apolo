@@ -6,9 +6,9 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using ApoloWebApp.Data;
+using ApoloWebApi.Data;
 
-namespace ApoloWebApp.Pages.Account
+namespace ApoloWebApi.Pages.Account
 {
     public class ExternalLoginModel : PageModel
     {

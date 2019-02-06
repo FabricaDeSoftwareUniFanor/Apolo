@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ApoloWebApp.Data
+namespace ApoloWebApi.Data
 {
-    public class Pessoa
+    public class Person
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public string Occupation { get; set; }
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
+
     }
 }

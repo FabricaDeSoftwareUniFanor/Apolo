@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ApoloWebApp.Pages.Account.Manage
+namespace ApoloWebApi.Pages.Account.Manage
 {
     public class ShowRecoveryCodesModel : PageModel
     {

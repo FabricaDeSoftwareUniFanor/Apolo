@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ApoloWebApp.Data;
+using ApoloWebApi.Data;
 
-namespace ApoloWebApp.Pages.Account.Manage
+namespace ApoloWebApi.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {

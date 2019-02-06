@@ -1,0 +1,5 @@
+C:\Users\Publico\repos\Apolo\apolo-web-api\web-api\obj\Debug\netcoreapp2.1\ApoloWebApi.csprojAssemblyReference.cache
+C:\Users\Publico\repos\Apolo\apolo-web-api\web-api\obj\Debug\netcoreapp2.1\ApoloWebApi.csproj.CoreCompileInputs.cache
+C:\Users\Publico\repos\Apolo\apolo-web-api\web-api\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\Users\Publico\repos\Apolo\apolo-web-api\web-api\obj\Debug\netcoreapp2.1\ApoloWebApi.AssemblyInfoInputs.cache
+C:\Users\Publico\repos\Apolo\apolo-web-api\web-api\obj\Debug\netcoreapp2.1\ApoloWebApi.AssemblyInfo.cs

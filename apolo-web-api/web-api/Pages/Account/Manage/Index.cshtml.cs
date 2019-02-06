@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using ApoloWebApp.Data;
-using ApoloWebApp.Services;
+using ApoloWebApi.Data;
+using ApoloWebApi.Services;
 
-namespace ApoloWebApp.Pages.Account.Manage
+namespace ApoloWebApi.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {

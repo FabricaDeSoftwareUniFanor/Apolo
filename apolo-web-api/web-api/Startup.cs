@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ApoloWebApp.Data;
-using ApoloWebApp.Services;
+using ApoloWebApi.Data;
+using ApoloWebApi.Services;
 
-namespace ApoloWebApp
+namespace ApoloWebApi
 {
     public class Startup
     {
@@ -39,6 +39,7 @@ namespace ApoloWebApp
             // Register no-op EmailSender used by account confirmation and password reset during development
             // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddScoped<IPersonRepository, PersonRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

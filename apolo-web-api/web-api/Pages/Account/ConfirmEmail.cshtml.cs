@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Threading.Tasks;
-using ApoloWebApp.Data;
+using ApoloWebApi.Data;
 
-namespace ApoloWebApp.Pages.Account
+namespace ApoloWebApi.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {

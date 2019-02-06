@@ -4,24 +4,28 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using ApoloWebApp.Data;
-using ApoloWebApp.Services;
+using ApoloWebApi.Data;
+using ApoloWebApi.Services;
+using System;
 
-namespace ApoloWebApp.Pages.Account
+namespace ApoloWebApi.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+        private IPersonRepository _repos;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        public RegisterModel(
+        public RegisterModel(                                
+            IPersonRepository repos,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<LoginModel> logger,
             IEmailSender emailSender)
         {
+            _repos = repos;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
@@ -35,23 +39,22 @@ namespace ApoloWebApp.Pages.Account
 
         public class RegisterInputModel
         {
-            //[Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]            
+            [Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]            
             [Display(Name = "Nome")]
             public string Name { get; set; }
 
-            //[Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
+            [Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
             [Display(Name = "Data de Nascimento")]
             [DataType(DataType.Date)]
-            public string BirthDate { get; set; }
+            public DateTime BirthDate { get; set; }
 
-            //[Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
+            [Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
             [Display(Name = "Profissão")]            
             public string Occupation { get; set; }
             
-            //[Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
+            [Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
             [Display(Name = "Contato")]
-            [DataType(DataType.PhoneNumber)]
-            [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+            [DataType(DataType.PhoneNumber)]            
             public string PhoneNumber { get; set; }
 
             [Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
@@ -80,9 +83,15 @@ namespace ApoloWebApp.Pages.Account
         {
             ReturnUrl = returnUrl;
             if (ModelState.IsValid)
-            {
+            {                
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                var newPerson = new Person
+                {
+                    Name = Input.Name,
+                    BirthDate = Input.BirthDate,
+                    Occupation = Input.Occupation                   
+                };
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -90,14 +99,14 @@ namespace ApoloWebApp.Pages.Account
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(Input.Email, callbackUrl);
-
+                    _repos.AddPerson(user.Id, newPerson);
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return LocalRedirect(Url.GetLocalUrl(returnUrl));
+                    return LocalRedirect(Url.GetLocalUrl(returnUrl));                    
                 }
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
-                }
+                }                
             }
 
             // If we got this far, something failed, redisplay form

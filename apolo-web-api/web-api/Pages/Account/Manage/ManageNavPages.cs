@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace ApoloWebApp.Pages.Account.Manage
+namespace ApoloWebApi.Pages.Account.Manage
 {
     public static class ManageNavPages
     {

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace ApoloWebApp.Pages.Account
+namespace ApoloWebApi.Pages.Account
 {
     public class AccessDeniedModel : PageModel
     {

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ApoloWebApp.Data.Migrations
+namespace ApoloWebApi.Data.Migrations
 {
     public partial class addclassePessoa : Migration
     {
