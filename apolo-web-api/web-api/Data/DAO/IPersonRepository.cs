@@ -1,6 +1,4 @@
-﻿using ApoloWebApi.Data;
-
-namespace ApoloWebApi.Services
+﻿namespace ApoloWebApi.Data
 {
     public interface IPersonRepository
     {

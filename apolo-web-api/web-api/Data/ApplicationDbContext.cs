@@ -5,7 +5,7 @@ namespace ApoloWebApi.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Person> Pessoas { get; set; }
+        public DbSet<Person> Persons { get; set; }  
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

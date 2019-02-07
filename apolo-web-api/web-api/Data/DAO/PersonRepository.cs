@@ -1,6 +1,4 @@
-﻿using ApoloWebApi.Data;
-
-namespace ApoloWebApi.Services
+﻿namespace ApoloWebApi.Data
 {
     public class PersonRepository : IPersonRepository
     {
@@ -20,7 +18,7 @@ namespace ApoloWebApi.Services
                 Occupation = person.Occupation,
                 UserId = userId
             };
-            _context.Pessoas.Add(newPerson);
+            _context.Persons.Add(newPerson);
             _context.SaveChanges();
         }
     }
