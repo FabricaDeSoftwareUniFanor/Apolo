@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace web_api.Pages
+namespace ApoloWebApi.Pages
 {
     public class IndexModel : PageModel
     {
         public void OnGet()
         {
-
+            
         }
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using web_api.Services;
+using ApoloWebApi.Services;
 
-namespace web_api.Services
+namespace ApoloWebApi.Services
 {
     public static class EmailSenderExtensions
     {

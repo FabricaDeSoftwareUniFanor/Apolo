@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using web_api.Data;
+using ApoloWebApi.Data;
 
-namespace web_api.Pages.Account
+namespace ApoloWebApi.Pages.Account
 {
     public class ResetPasswordModel : PageModel
     {
@@ -24,18 +24,19 @@ namespace web_api.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage ="O campo {0} é obrigatório",AllowEmptyStrings =false)]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage ="O campo {0} é obrigatório",AllowEmptyStrings =false)]
+            [StringLength(100, ErrorMessage = "O campo {0} deve ter no minímo {2} e no máximo {1} caracteres.", MinimumLength = 6)]
+            [Display(Name = "Senha")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Confirmar senha")]
+            [Compare("Password", ErrorMessage = "As senhas não correspondem.")]
             public string ConfirmPassword { get; set; }
 
             public string Code { get; set; }

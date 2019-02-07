@@ -31,3 +31,8 @@ msbuild.wrn
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /apolo-web-api/.vs
+/.vs
+/apolo-web-api/web-api/obj/Release/netcoreapp2.0
+/apolo-web-api/web-api/bin/Debug/netcoreapp2.0
+
+

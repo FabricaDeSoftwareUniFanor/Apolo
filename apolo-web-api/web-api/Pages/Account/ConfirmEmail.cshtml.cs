@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using web_api.Data;
+using System;
+using System.Threading.Tasks;
+using ApoloWebApi.Data;
 
-namespace web_api.Pages.Account
+namespace ApoloWebApi.Pages.Account
 {
     public class ConfirmEmailModel : PageModel
     {

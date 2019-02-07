@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using web_api.Data;
-using web_api.Services;
+using ApoloWebApi.Data;
+using ApoloWebApi.Services;
 
-namespace web_api.Pages.Account
+namespace ApoloWebApi.Pages.Account
 {
     public class ForgotPasswordModel : PageModel
     {
@@ -26,7 +26,7 @@ namespace web_api.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage ="O campo {0} é obrigatório",AllowEmptyStrings =false)]
             [EmailAddress]
             public string Email { get; set; }
         }

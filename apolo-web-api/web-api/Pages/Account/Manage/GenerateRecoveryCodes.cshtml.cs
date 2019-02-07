@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using web_api.Data;
+using ApoloWebApi.Data;
 
-namespace web_api.Pages.Account.Manage
+namespace ApoloWebApi.Pages.Account.Manage
 {
     public class GenerateRecoveryCodesModel : PageModel
     {
