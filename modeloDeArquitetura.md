@@ -1,1 +1,2 @@
-# Modelo de Arquitetura 
+# Modelo de Arquitetura
+![](Arquitetura_001.PNG)
