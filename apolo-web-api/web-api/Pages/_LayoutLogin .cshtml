@@ -1,6 +1,4 @@
-﻿@inject SignInManager<ApplicationUser> SignInManager
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -19,45 +17,12 @@
     </environment>
 </head>
 <body>
-    
-        <nav class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        var paginationName = (ViewData["Title"] == "Início") ? "" : "| " + ViewData["Title"];
-                        <a asp-page="/Index" class="navbar-brand">Início @paginationName</a>
-                    }
-
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        @*<li><a asp-page="/Index">Home</a></li>
-                            <li><a asp-page="/About">About</a></li>
-                            <li><a asp-page="/Contact">Contact</a></li>*@
-                    </ul>
-                    @await Html.PartialAsync("_LoginPartial")
-                </div>
-            </div>
-        </nav>
-    
-
-
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            @if (ViewData["Title"] == "Log in")
-            {<p></p>}
-            else
-            {<p>&copy; @DateTime.Now.Year - Apolo</p>}
-
+            
+            <p>&copy; @DateTime.Now - Apolo</p>
         </footer>
     </div>
 
