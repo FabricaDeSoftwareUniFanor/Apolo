@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ApoloWebApi.Data;
 using ApoloWebApi.Services;
+using System.Threading.Tasks;
+using System;
 
 namespace ApoloWebApi
 {
@@ -43,7 +45,7 @@ namespace ApoloWebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -61,6 +63,22 @@ namespace ApoloWebApi
             app.UseAuthentication();
 
             app.UseMvc();
+
+            CreateRoles(serviceProvider).Wait();
         }
+
+        public async Task CreateRoles(IServiceProvider serviceProvider)
+        {
+            var roleManeger = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            string[] rolesNames = { "Admin", "Consultor", "Paciente" };
+            IdentityResult result;
+            foreach(var roleName in rolesNames)
+            {
+                if (!await roleManeger.RoleExistsAsync(roleName))
+                    result = await roleManeger.CreateAsync(new IdentityRole(roleName));
+            }
+        }
+
     }
 }

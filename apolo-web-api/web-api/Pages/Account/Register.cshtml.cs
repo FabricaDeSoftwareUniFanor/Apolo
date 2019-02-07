@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 using ApoloWebApi.Data;
 using ApoloWebApi.Services;
 using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.Linq;
+using ApoloWebApi.Data.VO;
 
 namespace ApoloWebApi.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+        public Roles roles;
         private IPersonRepository _repos;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
@@ -20,11 +26,13 @@ namespace ApoloWebApi.Pages.Account
 
         public RegisterModel(                                
             IPersonRepository repos,
+            RoleManager<IdentityRole> roleManager,
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             ILogger<LoginModel> logger,
             IEmailSender emailSender)
         {
+            _roleManager = roleManager;
             _repos = repos;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -62,6 +70,10 @@ namespace ApoloWebApi.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
+            [Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]            
+            [Display(Name = "Tipo Usuário")]
+            public string Role { get; set; }
+
             [Required(ErrorMessage = "O campo {0} é obrigatório", AllowEmptyStrings = false)]
             [StringLength(100, ErrorMessage = "A {0} deve ser no mínimo {2} e no máximo {1} caracteres.", MinimumLength = 6)]
             [DataType(DataType.Password)]
@@ -75,7 +87,8 @@ namespace ApoloWebApi.Pages.Account
         }
 
         public void OnGet(string returnUrl = null)
-        {
+        {           
+            ViewData["Roles"] = new SelectList(_roleManager.Roles, "Id", "Name").OrderBy(r => r.Text);
             ReturnUrl = returnUrl;
         }
 
@@ -99,7 +112,14 @@ namespace ApoloWebApi.Pages.Account
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(Input.Email, callbackUrl);
+
+                    //Atribuindo uma role para usuário                                        
+                    var role = await _roleManager.FindByIdAsync(Input.Role);
+                    IdentityResult roleResult = await _userManager.AddToRoleAsync(user, role.Name);
+
+                    //Adicionando os dados de usuário na tabela Pessoa
                     _repos.AddPerson(user.Id, newPerson);
+
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(Url.GetLocalUrl(returnUrl));                    
                 }
