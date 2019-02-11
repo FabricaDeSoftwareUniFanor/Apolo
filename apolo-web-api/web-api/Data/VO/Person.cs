@@ -11,5 +11,12 @@ namespace ApoloWebApi.Data
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
 
+        public void Modify(string name, DateTime birthDate, string occupation)
+        {
+            Name = name;
+            BirthDate = birthDate;
+            Occupation = occupation;
+        }
+
     }
 }
