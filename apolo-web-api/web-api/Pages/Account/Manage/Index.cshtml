@@ -1,4 +1,4 @@
-@page
+ï»¿@page
 @model IndexModel
 @{
     ViewData["Title"] = "Perfil";
@@ -10,10 +10,34 @@
     <div class="col-md-6">
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="Input.Id" type="hidden" />
             <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled />
+                <label asp-for="Input.Name"></label>
+                <input asp-for="Input.Name" class="form-control" />
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Input.Date"></label>
+                <input asp-for="Input.Date" class="form-control" />
+                <span asp-validation-for="Input.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Occupation"></label>
+                <input asp-for="Input.Occupation" class="form-control" />
+                <span asp-validation-for="Input.Occupation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumber"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Role" class="control-label"></label>
+                <select asp-for="Input.Role" asp-items="ViewBag.Roles" class="form-control">
+                    <option value="@null">-- Selecione --</option>
+                </select>
+                <span asp-validation-for="Input.Role" class="text-danger"></span>
+            </div>            
             <div class="form-group">
                 <label asp-for="Input.Email"></label>
                 @if (Model.IsEmailConfirmed)
@@ -26,16 +50,11 @@
                 else
                 {
                     <input asp-for="Input.Email" class="form-control" />
-                    <button asp-page-handler="SendVerificationEmail" class="btn btn-link">Enviar email de verificação</button>
+                    <button asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
                 }
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.PhoneNumber"></label>
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-default">Salvar</button>
+            <button type="submit" class="btn btn-default">Save</button>
         </form>
     </div>
 </div>
