@@ -11,9 +11,10 @@ using System;
 namespace ApoloWebApi.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190212145528_add Tabela Flexiteste")]
+    partial class addTabelaFlexiteste
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -276,8 +277,6 @@ namespace ApoloWebApi.Data.Migrations
 
                     b.Property<int>("AducaoPostOmbro");
 
-                    b.Property<DateTime>("Date");
-
                     b.Property<int>("ExtensaoAducaoTronco");
 
                     b.Property<int>("ExtensaoPostOmbro");
@@ -299,130 +298,6 @@ namespace ApoloWebApi.Data.Migrations
                     b.HasIndex("PatientId");
 
                     b.ToTable("Flexitestes");
-                });
-
-            modelBuilder.Entity("ApoloWebApi.Data.VO.Evaluations.JSMPF", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<float>("CaloriasGastar");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<float>("FCInterrupcao");
-
-                    b.Property<float>("FCRepouso");
-
-                    b.Property<float>("Indice");
-
-                    b.Property<float>("KcalMin60");
-
-                    b.Property<float>("KcalMin80");
-
-                    b.Property<float>("LimiteMaxFC");
-
-                    b.Property<float>("LimiteMinFC");
-
-                    b.Property<int?>("PatientId");
-
-                    b.Property<int>("PatintId");
-
-                    b.Property<string>("Recomendacoes");
-
-                    b.Property<float>("ResultadoVO2");
-
-                    b.Property<float>("TempoBicicleta");
-
-                    b.Property<float>("TempoEsteira");
-
-                    b.Property<float>("TempoGastar60");
-
-                    b.Property<float>("TempoGastar80");
-
-                    b.Property<int>("ValoresTreino");
-
-                    b.Property<float>("VelTerminoTeste");
-
-                    b.Property<float>("VelocBicicleta");
-
-                    b.Property<float>("VelocEsteira");
-
-                    b.Property<float>("Velocidade60");
-
-                    b.Property<float>("Velocidade80");
-
-                    b.Property<int>("VezesSemana");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("JSMPFs");
-                });
-
-            modelBuilder.Entity("ApoloWebApi.Data.VO.Evaluations.Retracao", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Comentarios");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<int>("Isquiotibiais");
-
-                    b.Property<int>("Lombares");
-
-                    b.Property<int>("Ombros");
-
-                    b.Property<int>("PatientId");
-
-                    b.Property<int>("Peitoral");
-
-                    b.Property<int>("Psoas");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("Retracoes");
-                });
-
-            modelBuilder.Entity("ApoloWebApi.Data.VO.Evaluations.RiscoCoronariano", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Colesterol");
-
-                    b.Property<string>("Comentarios");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<int>("ExercicioFisico");
-
-                    b.Property<int>("Historico");
-
-                    b.Property<int>("Idade");
-
-                    b.Property<int>("PatientId");
-
-                    b.Property<int>("Peso");
-
-                    b.Property<int>("PressaoSistolica");
-
-                    b.Property<int>("Risco");
-
-                    b.Property<int>("Sexo");
-
-                    b.Property<int>("Tabagismo");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("RiscosCoronarianos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -564,29 +439,6 @@ namespace ApoloWebApi.Data.Migrations
                 });
 
             modelBuilder.Entity("ApoloWebApi.Data.VO.Evaluations.Flexiteste", b =>
-                {
-                    b.HasOne("ApoloWebApi.Data.Person", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ApoloWebApi.Data.VO.Evaluations.JSMPF", b =>
-                {
-                    b.HasOne("ApoloWebApi.Data.Person", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId");
-                });
-
-            modelBuilder.Entity("ApoloWebApi.Data.VO.Evaluations.Retracao", b =>
-                {
-                    b.HasOne("ApoloWebApi.Data.Person", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ApoloWebApi.Data.VO.Evaluations.RiscoCoronariano", b =>
                 {
                     b.HasOne("ApoloWebApi.Data.Person", "Patient")
                         .WithMany()

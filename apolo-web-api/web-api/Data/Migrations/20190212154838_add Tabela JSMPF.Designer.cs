@@ -11,9 +11,10 @@ using System;
 namespace ApoloWebApi.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190212154838_add Tabela JSMPF")]
+    partial class addTabelaJSMPF
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -389,42 +390,6 @@ namespace ApoloWebApi.Data.Migrations
                     b.ToTable("Retracoes");
                 });
 
-            modelBuilder.Entity("ApoloWebApi.Data.VO.Evaluations.RiscoCoronariano", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Colesterol");
-
-                    b.Property<string>("Comentarios");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<int>("ExercicioFisico");
-
-                    b.Property<int>("Historico");
-
-                    b.Property<int>("Idade");
-
-                    b.Property<int>("PatientId");
-
-                    b.Property<int>("Peso");
-
-                    b.Property<int>("PressaoSistolica");
-
-                    b.Property<int>("Risco");
-
-                    b.Property<int>("Sexo");
-
-                    b.Property<int>("Tabagismo");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
-
-                    b.ToTable("RiscosCoronarianos");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -579,14 +544,6 @@ namespace ApoloWebApi.Data.Migrations
                 });
 
             modelBuilder.Entity("ApoloWebApi.Data.VO.Evaluations.Retracao", b =>
-                {
-                    b.HasOne("ApoloWebApi.Data.Person", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ApoloWebApi.Data.VO.Evaluations.RiscoCoronariano", b =>
                 {
                     b.HasOne("ApoloWebApi.Data.Person", "Patient")
                         .WithMany()
