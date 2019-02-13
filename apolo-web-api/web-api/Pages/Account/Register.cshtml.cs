@@ -8,8 +8,9 @@ using ApoloWebApi.Data;
 using ApoloWebApi.Services;
 using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
 using ApoloWebApi.Data.VO;
+using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace ApoloWebApi.Pages.Account
 {
@@ -56,11 +57,21 @@ namespace ApoloWebApi.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
-        public void OnGet(string returnUrl = null)
+        public async Task<IActionResult> OnGet(string returnUrl = null)
         {
+            var user = await _userManager.GetUserAsync(User);
             Input = new InputModelPerson();
+            if (user != null)
+            {
+                var roleName = _userManager.GetRolesAsync(user).Result.FirstOrDefault();
+                if(roleName.Equals("Paciente"))
+                    return RedirectToPage("AccessDenied");
+            }
+            else
+                Input.Role = "3";
+
             ViewData["Roles"] = new SelectList(Input.Roles, "Value", "Text");
-            ReturnUrl = returnUrl;
+            return Page();
         }
 
         [ValidateAntiForgeryToken]
