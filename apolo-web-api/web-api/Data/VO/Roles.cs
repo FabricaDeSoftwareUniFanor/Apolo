@@ -8,7 +8,7 @@ namespace ApoloWebApi.Data.VO
     public enum Roles
     {
         Admin = 1,
-        Consultor,
-        Paciente
+        Avaliador,
+        Comum
     }
 }

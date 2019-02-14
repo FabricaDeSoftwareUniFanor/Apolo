@@ -69,9 +69,9 @@ namespace ApoloWebApi
 
         public async Task CreateRoles(IServiceProvider serviceProvider)
         {
-            var roleManeger = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();            
-            string[] rolesNames = { "Admin", "Consultor", "Paciente" };            
-            foreach(var roleName in rolesNames)
+            var roleManeger = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            string[] rolesNames = { "Admin", "Avaliador", "Comum" };
+            foreach (var roleName in rolesNames)
             {
                 if (!await roleManeger.RoleExistsAsync(roleName))
                     await roleManeger.CreateAsync(new IdentityRole(roleName));

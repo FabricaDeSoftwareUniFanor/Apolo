@@ -1,10 +1,7 @@
 ﻿@page
 @model RegisterModel
-@inject SignInManager<ApplicationUser> SignInManager
 @{
-    ViewData["Title"] = "Registrar";
-    var activetedRole = SignInManager.IsSignedIn(User);
-
+    ViewData["Title"] = "Registrar";        
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -41,7 +38,7 @@
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
 
-            @if (activetedRole)
+            @if (Model.Input.Role == null)
             {
                 <div class="form-group">
                     <label asp-for="Input.Role" class="control-label"></label>
@@ -51,8 +48,9 @@
                     <span asp-validation-for="Input.Role" class="text-danger"></span>
                 </div>
             }
-            else { <input asp-for="Input.Role" type="hidden" /> }
-                
+            else
+            { <input asp-for="Input.Role" type="hidden" />}
+
             <div class="form-group">
                 <label asp-for="InputPassword.Password"></label>
                 <input asp-for="InputPassword.Password" class="form-control" />

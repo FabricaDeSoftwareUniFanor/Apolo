@@ -8,5 +8,6 @@ namespace ApoloWebApi.Data
         void UpdatePerson(Person person, InputModelPerson input);
         Person GetPersonById(int? id);
         Person GetPersonByUserId(string id);
+        string GetRoleName(ApplicationUser user);
     }
 }

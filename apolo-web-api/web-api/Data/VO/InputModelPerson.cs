@@ -48,8 +48,8 @@ namespace ApoloWebApi.Data.VO
             Roles = new List<SelectListItem>()
             {
                 new SelectListItem{Value = "1", Text = "Admin"},
-                new SelectListItem{Value = "2", Text = "Consultor"},
-                new SelectListItem{Value = "3", Text = "Paciente"}
+                new SelectListItem{Value = "2", Text = "Avaliador"},
+                new SelectListItem{Value = "3", Text = "Comum"}
             };
         }        
     }
