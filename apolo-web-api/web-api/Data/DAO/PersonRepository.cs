@@ -1,4 +1,5 @@
 ﻿using ApoloWebApi.Data.VO;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -8,10 +9,11 @@ namespace ApoloWebApi.Data
     public class PersonRepository : IPersonRepository
     {
         private ApplicationDbContext _context;
-
-        public PersonRepository(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public PersonRepository(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public void AddPerson(string userId, Person person)
@@ -50,6 +52,14 @@ namespace ApoloWebApi.Data
         public Person GetPersonByUserId(string id)
         {
             return _context.Persons.FirstOrDefault(p => p.UserId == id);
+        }
+
+        public string GetRoleName(ApplicationUser user)
+        {
+            if(user == null)
+                return null;
+
+            return _userManager.GetRolesAsync(user).Result.FirstOrDefault();
         }
     }
 }

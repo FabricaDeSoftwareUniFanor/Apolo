@@ -65,18 +65,34 @@ namespace ApoloWebApi
             app.UseMvc();
 
             CreateRoles(serviceProvider).Wait();
+            CreateAdminUser(serviceProvider).Wait();
         }
 
         public async Task CreateRoles(IServiceProvider serviceProvider)
         {
             var roleManeger = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            string[] rolesNames = { "Admin", "Consultor", "Paciente" };
-            IdentityResult result;
-            foreach(var roleName in rolesNames)
+            string[] rolesNames = { "Admin", "Avaliador", "Comum" };
+            foreach (var roleName in rolesNames)
             {
                 if (!await roleManeger.RoleExistsAsync(roleName))
-                    result = await roleManeger.CreateAsync(new IdentityRole(roleName));
+                    await roleManeger.CreateAsync(new IdentityRole(roleName));
+            }
+        }
+
+        public async Task CreateAdminUser(IServiceProvider serviceProvider)
+        {
+            var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var repos = serviceProvider.GetRequiredService<IPersonRepository>();
+            var person = new Person { Name = "Admin" };
+            var email = "admin@email.com";
+            var password = "Admin@123";
+            var user = new ApplicationUser { UserName = email, Email = email };            
+
+            if (await userManager.FindByEmailAsync(email) == null)
+            {
+                await userManager.CreateAsync(user, password);
+                repos.AddPerson(user.Id, person);
+                await userManager.AddToRoleAsync(user, "Admin");
             }
         }
 

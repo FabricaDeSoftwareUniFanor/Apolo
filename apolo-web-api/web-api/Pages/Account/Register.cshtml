@@ -1,7 +1,7 @@
 ﻿@page
 @model RegisterModel
 @{
-    ViewData["Title"] = "Registrar";
+    ViewData["Title"] = "Registrar";        
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -37,13 +37,20 @@
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Role" class="control-label"></label>
-                <select asp-for="Input.Role" asp-items="ViewBag.Roles" class="form-control">
-                    <option value="@null">-- Selecione --</option>
-                </select>
-                <span asp-validation-for="Input.Role" class="text-danger"></span>
-            </div>
+
+            @if (Model.Input.Role == null)
+            {
+                <div class="form-group">
+                    <label asp-for="Input.Role" class="control-label"></label>
+                    <select asp-for="Input.Role" asp-items="ViewBag.Roles" class="form-control">
+                        <option value="@null">-- Selecione --</option>
+                    </select>
+                    <span asp-validation-for="Input.Role" class="text-danger"></span>
+                </div>
+            }
+            else
+            { <input asp-for="Input.Role" type="hidden" />}
+
             <div class="form-group">
                 <label asp-for="InputPassword.Password"></label>
                 <input asp-for="InputPassword.Password" class="form-control" />

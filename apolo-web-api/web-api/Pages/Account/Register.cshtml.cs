@@ -8,7 +8,6 @@ using ApoloWebApi.Data;
 using ApoloWebApi.Services;
 using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
 using ApoloWebApi.Data.VO;
 
 namespace ApoloWebApi.Pages.Account
@@ -33,7 +32,7 @@ namespace ApoloWebApi.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
-        }
+        }        
 
         [BindProperty]
         public InputModelPerson Input { get; set; }
@@ -56,11 +55,19 @@ namespace ApoloWebApi.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
-        public void OnGet(string returnUrl = null)
+        public async Task<IActionResult> OnGet(string returnUrl = null)
         {
             Input = new InputModelPerson();
+            var user = await _userManager.GetUserAsync(User);
+            var roleName = _repos.GetRoleName(user);
+
+            if (user != null && roleName.Equals("Comum"))
+                return RedirectToPage("AccessDenied");
+            else if(user == null || roleName.Equals("Avaliador"))
+                Input.Role = "3";
+
             ViewData["Roles"] = new SelectList(Input.Roles, "Value", "Text");
-            ReturnUrl = returnUrl;
+            return Page();
         }
 
         [ValidateAntiForgeryToken]
@@ -69,6 +76,7 @@ namespace ApoloWebApi.Pages.Account
             ReturnUrl = returnUrl;
             if (ModelState.IsValid)
             {
+                var currentUser = await _userManager.GetUserAsync(User);
                 var user = new ApplicationUser { UserName = Input.Email, PhoneNumber = Input.PhoneNumber, Email = Input.Email };
                 var newPerson = new Person
                 {
@@ -76,25 +84,28 @@ namespace ApoloWebApi.Pages.Account
                     BirthDate = Input.BirthDate,
                     Occupation = Input.Occupation
                 };
+
                 var result = await _userManager.CreateAsync(user, InputPassword.Password);
+                //Adicionando os dados de usuário na tabela Pessoa
+                _repos.AddPerson(user.Id, newPerson);
+                //Atribuindo uma role para usuário
+                var roleName = Enum.GetName(typeof(Roles), Int32.Parse(Input.Role));
+                await _userManager.AddToRoleAsync(user, roleName);
+
                 if (result.Succeeded)
                 {
+                    if (currentUser != null)
+                        return RedirectToPage("/Index");
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
                     await _emailSender.SendEmailConfirmationAsync(Input.Email, callbackUrl);
 
-                    //Adicionando os dados de usuário na tabela Pessoa
-                    _repos.AddPerson(user.Id, newPerson);
-
-                    //Atribuindo uma role para usuário
-                    var roleName = Enum.GetName(typeof(Roles), Int32.Parse(Input.Role));
-                    await _userManager.AddToRoleAsync(user, roleName);
-
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(Url.GetLocalUrl(returnUrl));
-                }
+                }                
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
