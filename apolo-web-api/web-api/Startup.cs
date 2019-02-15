@@ -64,36 +64,18 @@ namespace ApoloWebApi
 
             app.UseMvc();
 
-            CreateRoles(serviceProvider).Wait();
-            CreateAdminUser(serviceProvider).Wait();
-        }
+            Init(serviceProvider);
 
-        public async Task CreateRoles(IServiceProvider serviceProvider)
-        {
-            var roleManeger = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            string[] rolesNames = { "Admin", "Avaliador", "Comum" };
-            foreach (var roleName in rolesNames)
-            {
-                if (!await roleManeger.RoleExistsAsync(roleName))
-                    await roleManeger.CreateAsync(new IdentityRole(roleName));
-            }
-        }
+        }        
 
-        public async Task CreateAdminUser(IServiceProvider serviceProvider)
+        public static void Init(IServiceProvider serviceProvider)
         {
+            var context = serviceProvider.GetRequiredService<ApplicationDbContext>();
             var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var repos = serviceProvider.GetRequiredService<IPersonRepository>();
-            var person = new Person { Name = "Admin" };
-            var email = "admin@email.com";
-            var password = "Admin@123";
-            var user = new ApplicationUser { UserName = email, Email = email };            
-
-            if (await userManager.FindByEmailAsync(email) == null)
-            {
-                await userManager.CreateAsync(user, password);
-                repos.AddPerson(user.Id, person);
-                await userManager.AddToRoleAsync(user, "Admin");
-            }
+            context.Database.EnsureCreated();
+            Initializer.SeedData(userManager, roleManager, repos);
         }
 
     }
